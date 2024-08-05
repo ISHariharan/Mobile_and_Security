@@ -26,14 +26,14 @@ def start_server():
     conn, addr = server_socket.accept()
     print(f"Connected to {addr}")
 
-   
+
     encrypted_data = conn.recv(1024).decode()
     key = int(conn.recv(1024).decode())
 
-  
-    decrypted_data = decrypt(encrypted_data, key)
 
-  
+    decrypted_data = decrypt_message(encrypted_data, key)
+
+
     conn.send(decrypted_data.encode())
     conn.close()
 

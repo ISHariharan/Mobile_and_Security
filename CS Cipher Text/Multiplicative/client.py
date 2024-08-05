@@ -20,19 +20,15 @@ def start_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
 
-   
     text = input("Enter a word: ")
     key = int(input("Enter a key: "))
 
-    if key % 2 == 0:
-        print("Warning: Key is even. Encryption may not work as expected.")
+    encrypted_data = encrypt_message(text, key)
 
-   
-    encrypted_data = encrypt(text, key)
 
-   
     client_socket.send(encrypted_data.encode())
     client_socket.send(str(key).encode())
+
 
     decrypted_data = client_socket.recv(1024).decode()
 

@@ -25,14 +25,14 @@ def decrypt(cipher_text, key):
             plain_text += i
     return plain_text 
 
-# Get user input
+
 str_input = input("Enter a word: ")
 key = int(input("Enter a key: "))
 
 if key % 2 == 0:
     print("It will not work as the key is even")
 
-# Encrypt and Decrypt
+
 cipher_text = encrypt(str_input, key)
 print("Encrypted Code: ", cipher_text)
 
