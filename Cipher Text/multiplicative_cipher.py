@@ -2,7 +2,11 @@ def encrypt(plain_text, key):
     cipher_text = ""
     for i in plain_text:
         if i.isalpha():
-            cipher_text += chr(((ord(i) - ord('a')) * key) % 26 + ord('a'))
+            if i.islower():
+                base = ord('a')
+            else:
+                base = ord('A')
+            cipher_text += chr(((ord(i) - base) * key) % 26 + base)
         else:
             cipher_text += i
     return cipher_text
@@ -12,18 +16,25 @@ def decrypt(cipher_text, key):
     inverse = pow(key, -1, 26)
     for i in cipher_text:
         if i.isalpha():
-            plain_text += chr(((ord(i) - ord('a')) * inverse) % 26 + ord('a'))
+            if i.islower():
+                base = ord('a')
+            else:
+                base = ord('A')
+            plain_text += chr(((ord(i) - base) * inverse) % 26 + base)
         else:
             plain_text += i
     return plain_text 
 
+# Get user input
+str_input = input("Enter a word: ")
+key = int(input("Enter a key: "))
 
-str = input("Enter a word : ")
-key = int(input("Enter a key : "))
+if key % 2 == 0:
+    print("It will not work as the key is even")
 
-
-cipher_text = encrypt(str, key)
-print("Encrypted Code : ", cipher_text)
+# Encrypt and Decrypt
+cipher_text = encrypt(str_input, key)
+print("Encrypted Code: ", cipher_text)
 
 plain_text = decrypt(cipher_text, key)
-print("Decrypted Code : ", plain_text)
+print("Decrypted Code: ", plain_text)
